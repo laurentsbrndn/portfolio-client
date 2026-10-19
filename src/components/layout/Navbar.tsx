@@ -22,6 +22,12 @@ export const Navbar = ({ profile, items }: Props) => {
   const scrolled = useScrolled(16);
   const activeId = useActiveSection([...items.map((item) => item.id), 'contact']);
   const name = profile?.fullName?.trim() || 'Laurentius Brandon Vikario';
+  const initials = name
+    .split(' ')
+    .filter(Boolean)
+    .map((part) => part[0])
+    .join('')
+    .toUpperCase();
   const elevated = scrolled || isOpen;
 
   // Mobile menu: lock scroll, close on Escape, close when resized to desktop
@@ -72,7 +78,7 @@ export const Navbar = ({ profile, items }: Props) => {
           <a href="#about" className="group flex min-w-0 items-center" aria-label={`${name}, back to top`}>
             <span className="truncate font-display text-[15px] font-bold tracking-tight text-primary transition-opacity group-hover:opacity-80">
               <span className="hidden xl:inline">{name}</span>
-              <span className="xl:hidden">{name.split(' ')[0]}</span>
+              <span className="xl:hidden">{initials}</span>
               <span className="text-secondary">.</span>
             </span>
           </a>
